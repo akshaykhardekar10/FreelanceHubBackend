@@ -26,50 +26,13 @@ public class Users {
     private List<Jobs> jobsPosted =new ArrayList<>();
 
 
+    public List<Jobs> getJobsPosted() {
+        return jobsPosted;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void setJobsPosted(List<Jobs> jobsPosted) {
+        this.jobsPosted = jobsPosted;
+    }
 
     public String getId() {
         return id;

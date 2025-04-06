@@ -5,6 +5,8 @@ import com.example.FreelanceX2.DTO.JobsRequestDto;
 import com.example.FreelanceX2.DTO.JobsResponseDTO;
 import com.example.FreelanceX2.Model.Jobs;
 import com.example.FreelanceX2.Model.Users;
+import com.example.FreelanceX2.Repository.JobsRepository;
+import com.example.FreelanceX2.Repository.UserRepository;
 import com.example.FreelanceX2.Service.JobsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,11 @@ public class JobsController {
 
     @Autowired
     private JobsService jobsService;
+
+    @Autowired
+    private JobsRepository jobsRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/getAllJobs")
@@ -51,6 +58,9 @@ public class JobsController {
         response.setPostedById(job.getPostedBy().getId());
         response.setPostedByUsername(job.getPostedBy().getUsername());
         response.setPostedByEmail(job.getPostedBy().getEmail());
+
+
+
 
         return ResponseEntity.ok(response);
 

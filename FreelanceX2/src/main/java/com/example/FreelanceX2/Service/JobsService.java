@@ -54,8 +54,10 @@ public class JobsService {
         postedBy.setEmail(user.getEmail());
         job.setPostedBy(postedBy);
 
-
-        return jobsRepository.save(job);
+        Jobs savedJobs= jobsRepository.save(job);
+        user.getJobsPosted().add(savedJobs);
+        userRepository.save(user);
+        return savedJobs;
     }
 
     private JobsResponseDTO mapToJobResponse(Jobs job) {
