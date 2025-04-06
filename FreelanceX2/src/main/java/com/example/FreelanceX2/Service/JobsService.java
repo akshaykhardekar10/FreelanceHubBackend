@@ -61,18 +61,6 @@ public class JobsService {
     }
 
     private JobsResponseDTO mapToJobResponse(Jobs job) {
-        Jobs.PostedBy postedBy = job.getPostedBy();
-
-        return new JobsResponseDTO(
-                job.getJobId(),
-                job.getTitle(),
-                job.getDescription(),
-                job.getPrice(),
-                job.getDate(),
-                job.isAvailableNow(),
-                postedBy.getId(),
-                postedBy.getUsername(),
-                postedBy.getEmail()
-        );
+        return modelMapper.map(job, JobsResponseDTO.class);
     }
 }

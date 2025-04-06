@@ -59,9 +59,6 @@ public class JobsController {
         response.setPostedByUsername(job.getPostedBy().getUsername());
         response.setPostedByEmail(job.getPostedBy().getEmail());
 
-
-
-
         return ResponseEntity.ok(response);
 
     }

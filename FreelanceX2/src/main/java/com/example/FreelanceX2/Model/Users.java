@@ -25,11 +25,34 @@ public class Users {
     @DBRef
     private List<Jobs> jobsPosted =new ArrayList<>();
 
+    private List<String> skills =new ArrayList<>();
+    private String experience;
+    private String githubLink;
+
+    public String getGithubLink() {
+        return githubLink;
+    }
+    public void setGithubLink(String githubLink) {
+        this.githubLink = githubLink;
+    }
+
+    public List<String> getSkills() {
+        return skills;
+    }
+    public void setSkills(List<String> skills) {
+        this.skills = skills;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
 
     public List<Jobs> getJobsPosted() {
         return jobsPosted;
     }
-
     public void setJobsPosted(List<Jobs> jobsPosted) {
         this.jobsPosted = jobsPosted;
     }
@@ -37,7 +60,6 @@ public class Users {
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -45,7 +67,6 @@ public class Users {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -53,7 +74,6 @@ public class Users {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -61,7 +81,6 @@ public class Users {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -72,7 +91,6 @@ public class Users {
         this.email = email;
         this.username = username;
     }
-
     public Users() {
 
     }

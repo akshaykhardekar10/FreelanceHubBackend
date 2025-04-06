@@ -2,11 +2,9 @@ package com.example.FreelanceX2.Model;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Document(collection = "jobs")
@@ -31,6 +29,10 @@ public class Jobs {
 
     private String postedByUserId;
     private PostedBy postedBy;
+
+
+
+
 
     @Data
     public static class PostedBy {

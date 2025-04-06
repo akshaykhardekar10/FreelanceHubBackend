@@ -6,9 +6,13 @@ import com.example.FreelanceX2.DTO.*;
 import com.example.FreelanceX2.Model.Users;
 import com.example.FreelanceX2.Repository.UserRepository;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -18,6 +22,8 @@ public class UserService {
 
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -65,4 +71,30 @@ public class UserService {
 
         return new JwtTokenPairDTO(newAccessToken, newRefreshToken);
     }
+
+    public UserDto updateUserProfile( String userId ,UserProfileUpdateDto userProfileUpdateDto){
+            Users users= userRepository.findById(userId).orElseThrow(()-> new RuntimeException("user not found "));
+
+            if (userProfileUpdateDto.getSkills()!=null){
+                users.setSkills(userProfileUpdateDto.getSkills());
+            } if (userProfileUpdateDto.getExperience()!=null){
+                users.setExperience(userProfileUpdateDto.getExperience());
+            } if (userProfileUpdateDto.getGithubLink()!=null){
+                users.setGithubLink(userProfileUpdateDto.getGithubLink());
+            }
+        Users updated = userRepository.save(users);
+            return modelMapper.map(updated,UserDto.class);
+    }
+    public List<UserDto> getAllUsers(){
+        return userRepository.findAll()
+                .stream().map(this::mapToUserDto)
+                .collect(Collectors.toList());
+    }
+    private UserDto mapToUserDto(Users users){
+            return modelMapper.map(users,UserDto.class);
+    }
+
+//    public List<UserDto> getAllUsers(){
+//
+//    }
 }
