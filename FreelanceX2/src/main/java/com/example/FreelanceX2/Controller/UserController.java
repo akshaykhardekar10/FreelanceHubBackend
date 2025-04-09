@@ -35,5 +35,4 @@ public class UserController {
         UserDto updatedUserDto = userService.updateUserProfile(currentUser.getId(), updateDto);
         return ResponseEntity.ok(updatedUserDto);
     }
-
 }

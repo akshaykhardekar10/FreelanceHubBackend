@@ -63,4 +63,12 @@ public class JobsService {
     private JobsResponseDTO mapToJobResponse(Jobs job) {
         return modelMapper.map(job, JobsResponseDTO.class);
     }
+
+    public  List<JobsResponseDTO> getJobsPostedByMe(Users users){
+        List<Jobs> jobs =   jobsRepository.findByPostedByUserId(users.getId());
+
+        return jobs.stream()
+                .map(job -> modelMapper.map(job,JobsResponseDTO.class))
+                .collect(Collectors.toList());
+    }
 }

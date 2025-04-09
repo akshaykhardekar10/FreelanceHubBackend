@@ -80,7 +80,7 @@ public class UserService {
             } if (userProfileUpdateDto.getExperience()!=null){
                 users.setExperience(userProfileUpdateDto.getExperience());
             } if (userProfileUpdateDto.getGithubLink()!=null){
-                users.setGithubLink(userProfileUpdateDto.getGithubLink());
+                 users.setGithubLink(userProfileUpdateDto.getGithubLink());
             }
         Users updated = userRepository.save(users);
             return modelMapper.map(updated,UserDto.class);
@@ -94,7 +94,5 @@ public class UserService {
             return modelMapper.map(users,UserDto.class);
     }
 
-//    public List<UserDto> getAllUsers(){
-//
-//    }
+
 }

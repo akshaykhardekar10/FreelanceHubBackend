@@ -63,5 +63,10 @@ public class JobsController {
 
     }
 
-
+    @GetMapping("/getJobsPostedByMe")
+    public ResponseEntity<List<JobsResponseDTO>>  getMyPostedJobs(){
+       Users currentUser =(Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+       List<JobsResponseDTO> myPostedJobs = jobsService.getJobsPostedByMe(currentUser);
+       return  ResponseEntity.ok(myPostedJobs);
+    }
 }
