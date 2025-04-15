@@ -14,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -50,5 +52,37 @@ public class JobApplicationController {
 
         return ResponseEntity.ok(responseDto);
     }
+
+    @PatchMapping("/updateStatus/{applicationId}")
+    public ResponseEntity<String> updateApplicationStatus(
+            @PathVariable String applicationId,
+            @RequestParam("value") String status,
+            Principal principal) {
+
+        Users currentUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        jobApplicationService.updateApplicationStatus(applicationId, status, currentUser.getId());
+
+        return ResponseEntity.ok("Application status updated successfully.");
+    }
+    @GetMapping("/job/{jobId}/applications")
+    public ResponseEntity<List<JobApplicationResponseDto>> getApplicationsForJob(
+            @PathVariable String jobId) {
+
+        Users currentUser = (Users) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+
+        List<JobApplicationResponseDto> applications = jobApplicationService
+                .getApplicationsByJobIdForPoster(jobId, currentUser.getId());
+
+        return ResponseEntity.ok(applications);
+    }
+    @GetMapping("/myApplications")
+    public ResponseEntity<List<JobApplicationResponseDto>> getMyApplications() {
+        Users currentUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<JobApplicationResponseDto> applications = jobApplicationService.getApplicationsByUserId(currentUser.getId());
+        return ResponseEntity.ok(applications);
+    }
+
+
 
 }
