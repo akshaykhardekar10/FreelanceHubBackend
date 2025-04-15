@@ -57,20 +57,23 @@ public class JobApplicationService {
         JobApplications application = modelMapper.map(dto, JobApplications.class);
         application.setJobId(jobId);
         application.setApplicant(applicant);
+        application.setStatus(JobApplications.ApplicationStatus.PENDING);
 
         return jobApplicationsRepository.save(application);
     }
 
-    public JobApplicationResponseDto convertToResponseDto(JobApplications entity) {
-        JobApplicationResponseDto dto = modelMapper.map(entity, JobApplicationResponseDto.class);
+    public JobApplicationResponseDto convertToResponseDto(JobApplications jobApplications) {
+        JobApplicationResponseDto dto = modelMapper.map(jobApplications, JobApplicationResponseDto.class);
 
-        Users user = entity.getApplicant();
+        Users user = jobApplications.getApplicant();
         dto.setApplicantId(user.getId());
         dto.setApplicantUsername(user.getUsername());
         dto.setApplicantEmail(user.getEmail());
         dto.setSkills(user.getSkills());
         dto.setExperience(user.getExperience());
         dto.setGithubLink(user.getGithubLink());
+        dto.setStatus(jobApplications.getStatus());
+
 
         return dto;
     }

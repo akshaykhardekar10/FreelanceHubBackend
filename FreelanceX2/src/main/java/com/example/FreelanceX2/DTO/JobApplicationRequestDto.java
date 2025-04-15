@@ -13,10 +13,10 @@ public class JobApplicationRequestDto {
 
     private LocalDate jobApplicationDate = LocalDate.now();
 
+
     public long getBidPrice() {
         return bidPrice;
     }
-
     public void setBidPrice(long bidPrice) {
         this.bidPrice = bidPrice;
     }
@@ -24,7 +24,6 @@ public class JobApplicationRequestDto {
     public String getCoverLetter() {
         return coverLetter;
     }
-
     public void setCoverLetter(String coverLetter) {
         this.coverLetter = coverLetter;
     }
@@ -32,7 +31,6 @@ public class JobApplicationRequestDto {
     public LocalDate getJobApplicationDate() {
         return jobApplicationDate;
     }
-
     public void setJobApplicationDate(LocalDate jobApplicationDate) {
         this.jobApplicationDate = jobApplicationDate;
     }

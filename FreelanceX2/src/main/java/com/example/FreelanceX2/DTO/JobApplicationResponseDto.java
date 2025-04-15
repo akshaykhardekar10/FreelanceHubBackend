@@ -1,5 +1,6 @@
 package com.example.FreelanceX2.DTO;
 
+import com.example.FreelanceX2.Model.JobApplications;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -15,6 +16,8 @@ public class JobApplicationResponseDto {
     private String jobApplicationId;
     private String jobId;
 
+    private JobApplications.ApplicationStatus status;
+
     private String applicantId;
     private String applicantUsername;
     private String applicantEmail;
@@ -22,11 +25,16 @@ public class JobApplicationResponseDto {
     private String experience;
     private String githubLink;
 
+    public JobApplications.ApplicationStatus getStatus() {
+        return status;
+    }
+    public void setStatus(JobApplications.ApplicationStatus status) {
+        this.status = status;
+    }
 
     public long getBidPrice() {
         return bidPrice;
     }
-
     public void setBidPrice(long bidPrice) {
         this.bidPrice = bidPrice;
     }
@@ -34,7 +42,6 @@ public class JobApplicationResponseDto {
     public String getCoverLetter() {
         return coverLetter;
     }
-
     public void setCoverLetter(String coverLetter) {
         this.coverLetter = coverLetter;
     }
@@ -42,7 +49,6 @@ public class JobApplicationResponseDto {
     public LocalDate getJobApplicationDate() {
         return jobApplicationDate;
     }
-
     public void setJobApplicationDate(LocalDate jobApplicationDate) {
         this.jobApplicationDate = jobApplicationDate;
     }
@@ -50,7 +56,6 @@ public class JobApplicationResponseDto {
     public String getJobApplicationId() {
         return jobApplicationId;
     }
-
     public void setJobApplicationId(String jobApplicationId) {
         this.jobApplicationId = jobApplicationId;
     }
@@ -58,7 +63,6 @@ public class JobApplicationResponseDto {
     public String getJobId() {
         return jobId;
     }
-
     public void setJobId(String jobId) {
         this.jobId = jobId;
     }
@@ -66,7 +70,6 @@ public class JobApplicationResponseDto {
     public String getApplicantId() {
         return applicantId;
     }
-
     public void setApplicantId(String applicantId) {
         this.applicantId = applicantId;
     }
@@ -74,7 +77,6 @@ public class JobApplicationResponseDto {
     public String getApplicantUsername() {
         return applicantUsername;
     }
-
     public void setApplicantUsername(String applicantUsername) {
         this.applicantUsername = applicantUsername;
     }
@@ -82,7 +84,6 @@ public class JobApplicationResponseDto {
     public String getApplicantEmail() {
         return applicantEmail;
     }
-
     public void setApplicantEmail(String applicantEmail) {
         this.applicantEmail = applicantEmail;
     }
@@ -90,7 +91,6 @@ public class JobApplicationResponseDto {
     public List<String> getSkills() {
         return skills;
     }
-
     public void setSkills(List<String> skills) {
         this.skills = skills;
     }
@@ -98,7 +98,6 @@ public class JobApplicationResponseDto {
     public String getExperience() {
         return experience;
     }
-
     public void setExperience(String experience) {
         this.experience = experience;
     }
@@ -106,7 +105,6 @@ public class JobApplicationResponseDto {
     public String getGithubLink() {
         return githubLink;
     }
-
     public void setGithubLink(String githubLink) {
         this.githubLink = githubLink;
     }

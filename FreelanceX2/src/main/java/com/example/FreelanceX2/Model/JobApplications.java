@@ -24,10 +24,24 @@ public class JobApplications {
     private Users applicant; // Reference to Users document
 
 
+    public enum ApplicationStatus {
+        PENDING,
+        ACCEPTED,
+        REJECTED
+    }
+
+    public ApplicationStatus getStatus() {
+        return status;
+    }
+    public void setStatus(ApplicationStatus status) {
+        this.status = status;
+    }
+
+    private  ApplicationStatus status =ApplicationStatus.PENDING;
+
     public String getJobApplicationId() {
         return jobApplicationId;
     }
-
     public void setJobApplicationId(String jobApplicationId) {
         this.jobApplicationId = jobApplicationId;
     }
@@ -35,7 +49,6 @@ public class JobApplications {
     public String getJobId() {
         return jobId;
     }
-
     public void setJobId(String jobId) {
         this.jobId = jobId;
     }
@@ -43,7 +56,6 @@ public class JobApplications {
     public long getBidPrice() {
         return bidPrice;
     }
-
     public void setBidPrice(long bidPrice) {
         this.bidPrice = bidPrice;
     }
@@ -51,7 +63,6 @@ public class JobApplications {
     public String getCoverLetter() {
         return coverLetter;
     }
-
     public void setCoverLetter(String coverLetter) {
         this.coverLetter = coverLetter;
     }
@@ -59,7 +70,6 @@ public class JobApplications {
     public LocalDate getJobApplicationDate() {
         return jobApplicationDate;
     }
-
     public void setJobApplicationDate(LocalDate jobApplicationDate) {
         this.jobApplicationDate = jobApplicationDate;
     }
@@ -67,7 +77,6 @@ public class JobApplications {
     public Users getApplicant() {
         return applicant;
     }
-
     public void setApplicant(Users applicant) {
         this.applicant = applicant;
     }
