@@ -1,13 +1,18 @@
 package com.example.FreelanceX2.Controller;
 
+import com.example.FreelanceX2.Config.JwtUtil;
 import com.example.FreelanceX2.DTO.*;
 import com.example.FreelanceX2.Service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
+//@RequiredArgsConstructor
 public class AuthController {
 
     @Autowired
@@ -27,9 +32,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<JwtTokenPairDTO> loginUser(@RequestBody LoginDto loginDTO) {
+    public ResponseEntity<JwtTokenPairDTO> loginUser(@RequestBody LoginDto loginDTO , HttpServletResponse response) {
 
         JwtTokenPairDTO tokens = userService.loginUser(loginDTO);
+        Cookie cookie = new Cookie("refreshToken",tokens.getRefreshToken());
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
         return ResponseEntity.ok(tokens);
     }
 
