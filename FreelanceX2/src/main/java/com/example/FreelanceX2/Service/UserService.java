@@ -84,6 +84,8 @@ public class UserService {
                  users.setGithubLink(userProfileUpdateDto.getGithubLink());
             }if (userProfileUpdateDto.getDomain()!=null){
                 users.setDomain(userProfileUpdateDto.getDomain());
+            }if (userProfileUpdateDto.getBio()!=null){
+                users.setBio(userProfileUpdateDto.getBio());
         }
         Users updated = userRepository.save(users);
             return modelMapper.map(updated,UserDto.class);

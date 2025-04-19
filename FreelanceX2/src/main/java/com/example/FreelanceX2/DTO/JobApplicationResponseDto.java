@@ -25,6 +25,14 @@ public class JobApplicationResponseDto {
     private String experience;
     private String githubLink;
     private String domain;
+    private String bio;
+
+    public String getBio() {
+        return bio;
+    }
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     public String getDomain() {
         return domain;
