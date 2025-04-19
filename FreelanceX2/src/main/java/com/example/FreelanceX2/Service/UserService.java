@@ -40,6 +40,7 @@ public class UserService {
         user.setEmail(signupDTO.getEmail());
         user.setUsername(signupDTO.getUsername());
         user.setPassword(passwordEncoder.encode(signupDTO.getPassword()));
+
         userRepository.save(user);
     }
 
@@ -81,7 +82,9 @@ public class UserService {
                 users.setExperience(userProfileUpdateDto.getExperience());
             } if (userProfileUpdateDto.getGithubLink()!=null){
                  users.setGithubLink(userProfileUpdateDto.getGithubLink());
-            }
+            }if (userProfileUpdateDto.getDomain()!=null){
+                users.setDomain(userProfileUpdateDto.getDomain());
+        }
         Users updated = userRepository.save(users);
             return modelMapper.map(updated,UserDto.class);
     }

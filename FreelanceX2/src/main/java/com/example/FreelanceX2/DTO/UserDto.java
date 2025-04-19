@@ -12,8 +12,14 @@ public class UserDto {
     private List<String> skills;
     private String experience;
     private String githubLink;
+    private String domain;
 
-
+    public String getDomain() {
+        return domain;
+    }
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
 
     public String getId() {
         return id;

@@ -9,7 +9,15 @@ public class UserProfileUpdateDto {
     private List<String> skills;
     private String experience;
     private String githubLink;
+    private String domain;
 
+
+    public String getDomain() {
+        return domain;
+    }
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
 
     public List<String> getSkills() {
         return skills;

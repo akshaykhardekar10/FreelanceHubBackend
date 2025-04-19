@@ -24,7 +24,6 @@ public class JobsResponseDTO {
     public String getJobId() {
         return jobid;
     }
-
     public void setJobId(String jobid) {
         this.jobid = jobid;
     }
@@ -32,7 +31,6 @@ public class JobsResponseDTO {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -40,7 +38,6 @@ public class JobsResponseDTO {
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -48,7 +45,6 @@ public class JobsResponseDTO {
     public long getPrice() {
         return price;
     }
-
     public void setPrice(long price) {
         this.price = price;
     }
@@ -56,7 +52,6 @@ public class JobsResponseDTO {
     public LocalDate getDate() {
         return date;
     }
-
     public void setDate(LocalDate date) {
         this.date = date;
     }
@@ -64,7 +59,6 @@ public class JobsResponseDTO {
     public boolean isAvailableNow() {
         return availableNow;
     }
-
     public void setAvailableNow(boolean availableNow) {
         this.availableNow = availableNow;
     }
@@ -72,7 +66,6 @@ public class JobsResponseDTO {
     public String getPostedById() {
         return postedById;
     }
-
     public void setPostedById(String postedById) {
         this.postedById = postedById;
     }
@@ -80,7 +73,6 @@ public class JobsResponseDTO {
     public String getPostedByUsername() {
         return postedByUsername;
     }
-
     public void setPostedByUsername(String postedByUsername) {
         this.postedByUsername = postedByUsername;
     }
@@ -88,7 +80,6 @@ public class JobsResponseDTO {
     public String getPostedByEmail() {
         return postedByEmail;
     }
-
     public void setPostedByEmail(String postedByEmail) {
         this.postedByEmail = postedByEmail;
     }
