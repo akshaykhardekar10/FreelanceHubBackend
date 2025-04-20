@@ -32,6 +32,36 @@ public class Users {
     private String domain;
     private String bio;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public String getBio() {
         return bio;
     }

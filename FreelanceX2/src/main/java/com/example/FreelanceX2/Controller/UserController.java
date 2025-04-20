@@ -5,6 +5,7 @@ import com.example.FreelanceX2.DTO.UserDto;
 import com.example.FreelanceX2.DTO.UserProfileUpdateDto;
 import com.example.FreelanceX2.Model.Users;
 import com.example.FreelanceX2.Service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.AccessType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping("/getAllUsers")
     public ResponseEntity<List<UserDto>> getAllUsers(){
        List<UserDto>allUsers= userService.getAllUsers();
@@ -35,4 +40,12 @@ public class UserController {
         UserDto updatedUserDto = userService.updateUserProfile(currentUser.getId(), updateDto);
         return ResponseEntity.ok(updatedUserDto);
     }
+    @GetMapping("/getCurrentUser")
+    public ResponseEntity<UserDto> getCurrentUser() {
+        Users currentUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        UserDto response = modelMapper.map(currentUser, UserDto.class);
+        return ResponseEntity.ok(response);
+    }
+
 }
