@@ -7,6 +7,14 @@ public class JobsRequestDto {
     private String title;
     private String description;
     private long price;
+    private String jobDomain;
+
+    public String getJobDomain() {
+        return jobDomain;
+    }
+    public void setJobDomain(String jobDomain) {
+        this.jobDomain = jobDomain;
+    }
 
     public String getTitle() {
         return title;

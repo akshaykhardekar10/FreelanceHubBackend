@@ -14,6 +14,16 @@ public class UserDto {
     private String githubLink;
     private String domain;
     private String bio;
+    private double userRatings;
+
+
+
+    public double getUserRatings() {
+        return userRatings;
+    }
+    public void setUserRatings(double userRatings) {
+        this.userRatings = userRatings;
+    }
 
     public String getBio() {
         return bio;

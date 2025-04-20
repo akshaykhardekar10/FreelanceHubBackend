@@ -19,7 +19,21 @@ public class JobsResponseDTO {
     private String postedById;
     private String postedByUsername;
     private String postedByEmail;
+    private String jobDomain;
 
+    public String getJobid() {
+        return jobid;
+    }
+    public void setJobid(String jobid) {
+        this.jobid = jobid;
+    }
+
+    public String getJobDomain() {
+        return jobDomain;
+    }
+    public void setJobDomain(String jobDomain) {
+        this.jobDomain = jobDomain;
+    }
 
     public String getJobId() {
         return jobid;

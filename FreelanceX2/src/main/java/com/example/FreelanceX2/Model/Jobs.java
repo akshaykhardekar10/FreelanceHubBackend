@@ -29,10 +29,15 @@ public class Jobs {
 
     private String postedByUserId;
     private PostedBy postedBy;
+    private String jobDomain;
 
 
-
-
+    public String getJobDomain() {
+        return jobDomain;
+    }
+    public void setJobDomain(String jobDomain) {
+        this.jobDomain = jobDomain;
+    }
 
     @Data
     public static class PostedBy {

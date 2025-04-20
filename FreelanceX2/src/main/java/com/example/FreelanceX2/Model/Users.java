@@ -31,36 +31,14 @@ public class Users {
 
     private String domain;
     private String bio;
+    private double userRatings = Math.round((4.0 + (Math.random() * (5.0 - 4.0))) * 10.0) / 10.0;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public double getUserRatings() {
+        return userRatings;
+    }
+    public void setUserRatings(double userRatings) {
+        this.userRatings = userRatings;
+    }
 
     public String getBio() {
         return bio;

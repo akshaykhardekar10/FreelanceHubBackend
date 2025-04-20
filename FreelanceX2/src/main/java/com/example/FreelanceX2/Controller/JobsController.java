@@ -58,6 +58,7 @@ public class JobsController {
         response.setPostedById(job.getPostedBy().getId());
         response.setPostedByUsername(job.getPostedBy().getUsername());
         response.setPostedByEmail(job.getPostedBy().getEmail());
+        response.setJobDomain(job.getJobDomain());
 
         return ResponseEntity.ok(response);
 
