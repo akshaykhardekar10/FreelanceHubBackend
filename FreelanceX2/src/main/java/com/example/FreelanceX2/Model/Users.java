@@ -33,6 +33,15 @@ public class Users {
     private String bio;
     private double userRatings = Math.round((4.0 + (Math.random() * (5.0 - 4.0))) * 10.0) / 10.0;
 
+    private String profileImageUrl;
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
     public double getUserRatings() {
         return userRatings;
     }

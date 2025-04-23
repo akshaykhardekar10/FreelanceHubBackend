@@ -8,10 +8,12 @@ import com.example.FreelanceX2.Service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.AccessType;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,6 +41,16 @@ public class UserController {
 
         UserDto updatedUserDto = userService.updateUserProfile(currentUser.getId(), updateDto);
         return ResponseEntity.ok(updatedUserDto);
+    }
+
+    @PostMapping(value = "/uploadProfileImage", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<UserDto> uploadProfileImage(@RequestParam("image") MultipartFile imageFile) {
+        // Retrieve current logged-in user from the security context.
+        Users currentUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // Delegate the image upload logic to the service.
+        UserDto updatedUser = userService.uploadProfileImage(currentUser.getId(), imageFile);
+        return ResponseEntity.ok(updatedUser);
     }
     @GetMapping("/getCurrentUser")
     public ResponseEntity<UserDto> getCurrentUser() {

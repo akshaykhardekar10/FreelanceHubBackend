@@ -16,7 +16,14 @@ public class UserDto {
     private String bio;
     private double userRatings;
 
+    private String profileImageUrl;
 
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 
     public double getUserRatings() {
         return userRatings;

@@ -10,8 +10,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,6 +96,8 @@ public class UserService {
         Users updated = userRepository.save(users);
             return modelMapper.map(updated,UserDto.class);
     }
+
+
     public List<UserDto> getAllUsers(){
         return userRepository.findAll()
                 .stream().map(this::mapToUserDto)
@@ -99,5 +107,38 @@ public class UserService {
             return modelMapper.map(users,UserDto.class);
     }
 
+
+
+
+    // New method: Upload profile image and update user record
+    public UserDto uploadProfileImage(String userId, MultipartFile imageFile) {
+        Users user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Define the upload directory; for demo purposes, it is relative to the project root.
+        String uploadDir = "uploads/";
+        // Generate a unique file name using UUID to avoid collisions.
+        String fileName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
+
+        try {
+            // Create the directory if it does not exist.
+            Path uploadPath = Paths.get(uploadDir);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+            // Write the file to the upload directory.
+            Path filePath = uploadPath.resolve(fileName);
+            Files.write(filePath, imageFile.getBytes());
+            // Build the URL to access this image. (For demo, we assume the server runs on localhost:8080.)
+            String imageUrl = "http://localhost:8080/uploads/" + fileName;
+            // Set the URL in the user entity.
+            user.setProfileImageUrl(imageUrl);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload profile image", e);
+        }
+
+        Users updatedUser = userRepository.save(user);
+        return modelMapper.map(updatedUser, UserDto.class); // Return the updated user as DTO.
+    }
 
 }
