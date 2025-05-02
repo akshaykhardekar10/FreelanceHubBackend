@@ -15,7 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -54,7 +56,7 @@ public class JobApplicationController {
     }
 
     @PatchMapping("/updateStatus/{applicationId}")
-    public ResponseEntity<String> updateApplicationStatus(
+    public ResponseEntity<Map<String, String>> updateApplicationStatus(
             @PathVariable String applicationId,
             @RequestParam("value") String status,
             Principal principal) {
@@ -62,8 +64,13 @@ public class JobApplicationController {
         Users currentUser = (Users) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         jobApplicationService.updateApplicationStatus(applicationId, status, currentUser.getId());
 
-        return ResponseEntity.ok("Application status updated successfully.");
+        // Updated to return a JSON object
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Application status updated successfully.");
+        return ResponseEntity.ok(response);  // Return as JSON object
     }
+
+
     @GetMapping("/job/{jobId}/applications")
     public ResponseEntity<List<JobApplicationResponseDto>> getApplicationsForJob(
             @PathVariable String jobId) {
