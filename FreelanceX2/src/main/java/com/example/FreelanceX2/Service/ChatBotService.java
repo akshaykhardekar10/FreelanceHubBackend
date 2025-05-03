@@ -10,16 +10,18 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
-
 @Service
 public class ChatBotService {
 
     @Value("${API.KEY}")
-    private  String API_KEY ;
+    private String apiKey;
+
     @Value("${URL}")
-    private  String URL;
+    private String baseUrl;
 
     public String getGeminiResponse(String prompt) {
+        String fullUrl = baseUrl + "?key=" + apiKey;
+
         RestTemplate restTemplate = new RestTemplate();
 
         Map<String, Object> requestBody = Map.of(
@@ -33,7 +35,7 @@ public class ChatBotService {
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
 
-        ResponseEntity<Map> response = restTemplate.postForEntity(URL, request, Map.class);
+        ResponseEntity<Map> response = restTemplate.postForEntity(fullUrl, request, Map.class);
 
         try {
             List<Map> candidates = (List<Map>) response.getBody().get("candidates");

@@ -37,6 +37,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/jobs").authenticated()
                         .requestMatchers(HttpMethod.POST, "/jobApplications").authenticated()
+                        .requestMatchers("/uploads/**").permitAll()
+                        .requestMatchers("/api/chatbot/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
