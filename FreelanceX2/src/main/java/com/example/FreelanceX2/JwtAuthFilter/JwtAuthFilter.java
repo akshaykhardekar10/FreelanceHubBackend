@@ -32,6 +32,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        
+        // Skip JWT processing for permitted endpoints
+        String requestPath = request.getRequestURI();
+
+        // Normalize just in case context path is prefixed
+        if (requestPath.contains("/api/auth/") ||
+            requestPath.contains("/api/matching/") ||
+            requestPath.contains("/uploads/") ||
+            requestPath.contains("/api/chatbot/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        
+        
         final String authHeader = request.getHeader("Authorization");
         String email = null;
         String token = null;

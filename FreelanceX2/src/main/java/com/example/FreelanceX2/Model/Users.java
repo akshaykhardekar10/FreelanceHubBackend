@@ -34,6 +34,17 @@ public class Users {
     private double userRatings = Math.round((4.0 + (Math.random() * (5.0 - 4.0))) * 10.0) / 10.0;
 
     private String profileImageUrl;
+    
+    // Embedding field for semantic matching
+    private List<Double> profileEmbedding;
+
+    public List<Double> getProfileEmbedding() {
+        return profileEmbedding;
+    }
+    
+    public void setProfileEmbedding(List<Double> profileEmbedding) {
+        this.profileEmbedding = profileEmbedding;
+    }
 
     public String getProfileImageUrl() {
         return profileImageUrl;

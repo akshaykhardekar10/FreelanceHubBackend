@@ -25,6 +25,9 @@ public class JobsService {
 
     @Autowired
     private ModelMapper modelMapper;
+    
+    @Autowired
+    private EmbeddingService embeddingService;
 
     public List<JobsResponseDTO> getAllJobs() {
         return jobsRepository.findAll()
@@ -53,6 +56,22 @@ public class JobsService {
         postedBy.setUsername(user.getUsername());
         postedBy.setEmail(user.getEmail());
         job.setPostedBy(postedBy);
+
+        // Generate embedding for the job
+        try {
+            String embeddingText = embeddingService.createEmbeddingText(
+                job.getTitle(), 
+                job.getDescription(), 
+                null, // jobs don't have skills list directly
+                job.getJobDomain()
+            );
+            if (!embeddingText.trim().isEmpty()) {
+                job.setJobEmbedding(embeddingService.generateEmbedding(embeddingText));
+            }
+        } catch (Exception e) {
+            // Log error but don't fail the job creation
+            System.err.println("Failed to generate embedding for job " + job.getTitle() + ": " + e.getMessage());
+        }
 
         Jobs savedJobs= jobsRepository.save(job);
         user.getJobsPosted().add(savedJobs);

@@ -13,4 +13,8 @@ public interface JobsRepository extends MongoRepository<Jobs, String > {
     List<Jobs> findByAvailableNowTrue();
     @Query("{ 'postedByUserId' : ?0 }")
     List<Jobs> findByPostedByUserId(String postedByUserId);
+    
+    // Find jobs with non-null embeddings for similarity search
+    @Query("{ 'jobEmbedding' : { $exists: true, $ne: null } }")
+    List<Jobs> findJobsWithEmbeddings();
 }

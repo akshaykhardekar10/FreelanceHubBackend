@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Document(collection = "jobs")
@@ -30,7 +31,18 @@ public class Jobs {
     private String postedByUserId;
     private PostedBy postedBy;
     private String jobDomain;
+    
+    // Embedding field for semantic matching
+    private List<Double> jobEmbedding;
 
+
+    public List<Double> getJobEmbedding() {
+        return jobEmbedding;
+    }
+    
+    public void setJobEmbedding(List<Double> jobEmbedding) {
+        this.jobEmbedding = jobEmbedding;
+    }
 
     public String getJobDomain() {
         return jobDomain;

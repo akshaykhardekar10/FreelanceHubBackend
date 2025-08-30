@@ -33,6 +33,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private EmbeddingService embeddingService;
 
     public void registerUser(SignupDto signupDTO) {
         boolean emailExists = userRepository.existsByEmail(signupDTO.getEmail());
@@ -46,6 +49,22 @@ public class UserService {
         user.setEmail(signupDTO.getEmail());
         user.setUsername(signupDTO.getUsername());
         user.setPassword(passwordEncoder.encode(signupDTO.getPassword()));
+
+        // Initialize profile embedding on signup (based on available info)
+        try {
+            String embeddingText = embeddingService.createEmbeddingText(
+                user.getUsername(),
+                user.getBio(),
+                user.getSkills(),
+                user.getDomain()
+            );
+            if (!embeddingText.trim().isEmpty()) {
+                user.setProfileEmbedding(embeddingService.generateEmbedding(embeddingText));
+            }
+        } catch (Exception e) {
+            // Log and continue without failing signup
+            System.err.println("Failed to generate embedding on signup for user " + user.getUsername() + ": " + e.getMessage());
+        }
 
         userRepository.save(user);
     }
@@ -93,6 +112,23 @@ public class UserService {
             }if (userProfileUpdateDto.getBio()!=null){
                 users.setBio(userProfileUpdateDto.getBio());
         }
+        
+        // Generate embedding for updated profile
+        try {
+            String embeddingText = embeddingService.createEmbeddingText(
+                users.getUsername(), 
+                users.getBio(), 
+                users.getSkills(), 
+                users.getDomain()
+            );
+            if (!embeddingText.trim().isEmpty()) {
+                users.setProfileEmbedding(embeddingService.generateEmbedding(embeddingText));
+            }
+        } catch (Exception e) {
+            // Log error but don't fail the update
+            System.err.println("Failed to generate embedding for user " + userId + ": " + e.getMessage());
+        }
+        
         Users updated = userRepository.save(users);
             return modelMapper.map(updated,UserDto.class);
     }
