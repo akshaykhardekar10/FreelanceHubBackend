@@ -89,7 +89,4 @@ public class JobApplicationController {
         List<JobApplicationResponseDto> applications = jobApplicationService.getApplicationsByUserId(currentUser.getId());
         return ResponseEntity.ok(applications);
     }
-
-
-
 }

@@ -13,7 +13,7 @@ import java.util.Map;
 @Service
 public class ChatBotService {
 
-    @Value("${API.KEY}")
+    @Value("${API_KEY}")
     private String apiKey;
 
     @Value("${URL}")

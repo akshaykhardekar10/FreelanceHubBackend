@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 @Service
-@NoArgsConstructor
-@AllArgsConstructor
+
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
