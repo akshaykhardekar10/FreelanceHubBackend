@@ -49,7 +49,8 @@ public class EmbeddingService {
             boolean isEmbedContent = apiUrl.contains(":embedContent");
             if (looksLikeGenerateContent || (!isEmbedText && !isEmbedContent)) {
                 // Override to the correct embedding endpoint (embedContent by default)
-                effectiveUrl = "https://generativelanguage.googleapis.com/v1beta/" + model + ":embedContent";
+                effectiveUrl =
+                        "https://generativelanguage.googleapis.com/v1beta/" + model + ":embedContent";
                 log.warn("Overriding misconfigured gemini.api.url to embedding endpoint: {}", effectiveUrl);
                 isEmbedContent = true;
                 isEmbedText = false;
