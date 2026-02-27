@@ -10,6 +10,28 @@ FreelanceHubBackend is a production-ready backend system built using **Spring Bo
 
 This backend powers a React-based freelancing platform and implements intelligent freelancer–project matching using vector similarity instead of traditional keyword matching.
 
+
+
+---
+---
+
+# 🎯 Problem Statement
+
+Traditional freelance platforms rely heavily on keyword-based matching 
+to connect freelancers with projects. This approach fails to capture 
+the true semantic meaning behind project descriptions and skill sets, 
+often leading to irrelevant matches and poor recommendation quality.
+
+FreelanceHubBackend addresses this limitation by integrating 
+AI-powered semantic embeddings using the Gemini Embedding API. 
+Instead of matching exact keywords, the system converts project 
+descriptions and freelancer profiles into high-dimensional vectors 
+and calculates cosine similarity to determine contextual relevance.
+
+This enables intelligent, meaning-based matching between freelancers 
+and projects, significantly improving recommendation accuracy 
+and user experience.
+
 ---
 
 # 🏗️ System Architecture
