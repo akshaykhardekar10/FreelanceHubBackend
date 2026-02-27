@@ -1,141 +1,238 @@
+# 💼 FreelanceHubBackend — AI-Powered Freelance Matching Engine
 
-# 💼 FreelanceHubBackend
+![Java](https://img.shields.io/badge/Java-21-blue)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.3.x-green)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen)
+![Authentication](https://img.shields.io/badge/Auth-JWT-orange)
+![Documentation](https://img.shields.io/badge/API-Swagger-blue)
 
-**FreelanceHubBackend** is the backend service for a freelancing platform, built using **Spring Boot** and **MongoDB**. It supports a React-based frontend and provides RESTful APIs for user management, project listings, bids, and more.
+FreelanceHubBackend is a production-ready backend system built using **Spring Boot**, **MongoDB**, and **JWT authentication**, enhanced with **AI-powered semantic matching** using Google Gemini text embeddings.
 
----
-
-## 📑 Table of Contents
-
-- [🚀 Features](#-features)
-- [🛠️ Tech Stack](#-tech-stack)
-- [⚙️ Getting Started](#-getting-started)
-- [📡 API Endpoints](#-api-endpoints)
-- [📁 Project Structure](#-project-structure)
-- [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
-- [📬 Contact](#-contact)
+This backend powers a React-based freelancing platform and implements intelligent freelancer–project matching using vector similarity instead of traditional keyword matching.
 
 ---
 
-## 🚀 Features
+# 🏗️ System Architecture
 
-- User registration and authentication (JWT-based)
-- Role-based access for freelancers and clients
-- Project posting and management
-- Bidding system for freelancers
-- Project assignment and status tracking
-- RESTful API for frontend integration
-- MongoDB for scalable data storage
+```
+        ┌────────────────────┐
+        │   React Frontend   │
+        └─────────┬──────────┘
+                  │ HTTP (REST)
+                  ▼
+        ┌────────────────────┐
+        │ Spring Boot API    │
+        │  (Controllers)     │
+        └─────────┬──────────┘
+                  │
+                  ▼
+        ┌────────────────────┐
+        │ JWT Auth Filter    │
+        │ (Security Layer)   │
+        └─────────┬──────────┘
+                  │
+                  ▼
+        ┌────────────────────┐
+        │ Service Layer      │
+        │ (Business Logic)   │
+        └───────┬─────┬──────┘
+                │     │
+                │     ▼
+                │  ┌────────────────────┐
+                │  │ Gemini Embedding   │
+                │  │ API Integration    │
+                │  └────────────────────┘
+                │
+                ▼
+        ┌────────────────────┐
+        │ MongoDB Database   │
+        │ (Users, Projects,  │
+        │  Embeddings)       │
+        └────────────────────┘
+```
+---
+
+### Architecture Flow
+
+Frontend (React)  
+→ Spring Boot REST Controllers  
+→ JWT Authentication Filter  
+→ Service Layer  
+→ AI Embedding Service (Gemini API)  
+→ MongoDB Database  
 
 ---
 
-## 🛠️ Tech Stack
+# 🤖 AI-Powered Semantic Matching
 
-- **Backend:** Java, Spring Boot
-- **Database:** MongoDB
-- **Frontend:** React (See [FreelanceHubFrontend](https://github.com/akshaykhardekar10/FreelanceHub-Frontend))
+
+<!-- DRAG & DROP AI FLOW IMAGE BELOW -->
+
+<!-- Example after upload:
+![AI Flow](./assets/ai-flow.png)
+-->
 
 ---
 
-## ⚙️ Getting Started
+## 🔍 How Matching Works
 
-### ✅ Prerequisites
+1. Combine:
+   - Title
+   - Description
+   - Domain
+   - Skills  
+
+2. Generate high-dimensional embedding using **Gemini Embedding API**
+
+3. Store embedding vector in MongoDB
+
+4. Compute cosine similarity between vectors
+
+5. Return ranked results
+
+---
+
+# 📊 Matching Algorithm
+
+Cosine Similarity Formula:
+
+```
+cos(θ) = (A · B) / (||A|| ||B||)
+```
+
+### Why Cosine Similarity?
+
+- Focuses on semantic direction, not magnitude
+- Stable for NLP embeddings
+- Deterministic and efficient
+- Industry standard for vector similarity
+
+---
+
+# 🔐 Security Architecture
+
+- JWT-based stateless authentication
+- Custom `OncePerRequestFilter`
+- Centralized whitelist for public endpoints
+- Role-based access control
+- Swagger endpoints excluded securely from JWT filter
+
+---
+
+# 📡 API Documentation (Swagger)
+
+Swagger UI available locally:
+
+```
+http://localhost:8080/swagger-ui/index.html
+```
+
+---
+
+## 📸 Swagger UI Preview
+
+<img width="1679" height="775" alt="Screenshot 2026-02-27 231230" src="https://github.com/user-attachments/assets/3d632471-8755-4a29-8470-05133f671a55" />
+<img width="1647" height="876" alt="Screenshot 2026-02-27 231244" src="https://github.com/user-attachments/assets/5f5bdb32-ebef-47a7-98df-4fb9056a6f11" />
+
+---
+
+# 🌐 Frontend Integration
+
+This backend powers the React frontend:
+
+https://github.com/akshaykhardekar10/FreelanceHub-Frontend
+
+
+<img width="1894" height="904" alt="Screenshot 2025-05-04 160758" src="https://github.com/user-attachments/assets/36cdd53b-0eae-4fa2-97b7-eb4d382da55e" />
+
+---
+
+# 🚀 Core Backend Features
+
+### Authentication & Security
+- User signup/login
+- JWT token generation
+- Role-based authorization
+- Stateless session management
+
+### Business Logic
+- Project posting
+- Freelancer bidding
+- Project assignment
+- Status tracking
+
+### AI Capabilities
+- Gemini text embedding integration
+- Vector storage in MongoDB
+- Cosine similarity-based ranking
+- Adaptive retry logic for API resilience
+
+---
+
+# 🛠 Tech Stack
+
+### Backend
+- Java 21
+- Spring Boot 3.3.x
+- Spring Security
+- JWT
+- MongoDB
+
+### AI Integration
+- Google Gemini Embedding API
+- Vector similarity computation
+
+### Documentation
+- springdoc OpenAPI (Swagger)
+
+---
+
+# ⚙️ Running Locally
+
+## Prerequisites
 
 - Java 17+
 - Maven 3.6+
-- MongoDB running locally or via cloud
-
-### 📦 Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/akshaykhardekar10/FreelanceHubBackend.git
-   cd FreelanceHubBackend
-   ```
-
-2. **Build the project:**
-   ```bash
-   mvn clean install
-   ```
-
-3. **Run the application:**
-   ```bash
-   mvn spring-boot:run
-   ```
-
-4. **Access the API:**
-   ```
-   http://localhost:8080/api/
-   ```
+- MongoDB (Local or Atlas)
 
 ---
 
-## 📡 API Endpoints (Sample)
+## Setup
 
-| Method | Endpoint                   | Description                        |
-|--------|----------------------------|------------------------------------|
-| POST   | `/api/auth/signup`         | Register a new user                |
-| POST   | `/api/auth/login`          | Authenticate user and return JWT   |
-| GET    | `/api/projects`            | List all available projects        |
-| POST   | `/api/projects`            | Post a new project                 |
-| POST   | `/api/bids/{projectId}`    | Submit a bid on a project          |
-| GET    | `/api/users/{userId}`      | Fetch user profile info            |
+```bash
+git clone https://github.com/akshaykhardekar10/FreelanceHubBackend.git
+cd FreelanceHubBackend
+mvn clean install
+mvn spring-boot:run
+```
 
----
-
-## 📁 Project Structure
+Access Swagger:
 
 ```
-FreelanceHubBackend/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/freelancehub/
-│   │   │       ├── controller/        # REST Controllers
-│   │   │       ├── model/             # Domain models
-│   │   │       ├── repository/        # MongoDB repositories
-│   │   │       ├── service/           # Business logic
-│   │   │       └── config/            # Security and app config
-│   └── resources/
-│       └── application.properties     # Spring Boot configuration
-├── pom.xml
-└── README.md
+http://localhost:8080/swagger-ui/index.html
 ```
 
 ---
 
-## 🤝 Contributing
+# 📈 Future Improvements
 
-Contributions are welcome! Follow the steps below:
-
-1. Fork the repository
-2. Create a new branch:
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add new feature"
-   ```
-4. Push to your branch:
-   ```bash
-   git push origin feature/YourFeature
-   ```
-5. Open a Pull Request
+- MongoDB Atlas Vector Search
+- ANN indexing (FAISS / Vector DB)
+- Embedding caching layer
+- Batch embedding optimization
+- AI ranking model enhancements
 
 ---
 
-## 📄 License
+# 🎯 Resume Highlight
 
-This project is licensed under the [MIT License](LICENSE).
+Built a secure AI-powered backend system integrating semantic embeddings and cosine similarity for intelligent freelance matching using Spring Boot and MongoDB.
 
 ---
 
-## 📬 Contact
+# 📬 Contact
 
 **Akshay Khardekar**  
 📧 khardekarakshay33@gmail.com  
-🔗 [GitHub](https://github.com/akshaykhardekar10) • [LinkedIn](https://linkedin.com/in/akshaykhardekar)
-
----
+🔗 GitHub: https://github.com/akshaykhardekar10  
+🔗 LinkedIn: https://linkedin.com/in/akshaykhardekar
