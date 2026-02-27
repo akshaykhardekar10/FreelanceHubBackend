@@ -37,6 +37,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/matching/**").permitAll()
                         .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers("/api/chatbot/**").permitAll()
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/jobs").authenticated()
                         .requestMatchers(HttpMethod.POST, "/jobApplications").authenticated()
                         .anyRequest().authenticated()

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
@@ -27,6 +28,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserRepository userRepository;
+    private static final List<String> PUBLIC_PATHS = List.of(
+            "/api/auth/",
+            "/api/matching/",
+            "/uploads/",
+            "/api/chatbot/",
+            "/swagger-ui/",
+            "/v3/api-docs",
+            "/swagger-ui.html"
+    );
+    private boolean isPublicPath(String requestPath) {
+        return PUBLIC_PATHS.stream().anyMatch(requestPath::startsWith);
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,14 +49,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         // Skip JWT processing for permitted endpoints
         String requestPath = request.getRequestURI();
 
-        // Normalize just in case context path is prefixed
-        if (requestPath.contains("/api/auth/") ||
-            requestPath.contains("/api/matching/") ||
-            requestPath.contains("/uploads/") ||
-            requestPath.contains("/api/chatbot/")) {
+        if (isPublicPath(requestPath)) {
             filterChain.doFilter(request, response);
             return;
         }
+
+
         
         
         final String authHeader = request.getHeader("Authorization");
